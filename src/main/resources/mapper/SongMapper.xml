@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.SongMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.Song">
+    <id column="song_id" jdbcType="INTEGER" property="songId" />
+    <result column="song_title" jdbcType="VARCHAR" property="songTitle" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="genres" jdbcType="VARCHAR" property="genres" />
+    <result column="play_count" jdbcType="VARCHAR" property="playCount" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="royalty_rate" jdbcType="DECIMAL" property="royaltyRate" />
+    <result column="release_date" jdbcType="VARCHAR" property="releaseDate" />
+    <result column="release_country" jdbcType="VARCHAR" property="releaseCountry" />
+    <result column="album" jdbcType="INTEGER" property="album" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Songs
+    where song_id = #{songId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.Song"  useGeneratedKeys="true">
+    <selectKey keyProperty="songId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Songs (song_id, song_title, duration,
+    genres, play_count, language,
+    royalty_rate, release_date, release_country,
+    album)
+    values (#{songId,jdbcType=INTEGER}, #{songTitle,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
+    #{genres,jdbcType=VARCHAR}, #{playCount,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR},
+    #{royaltyRate,jdbcType=DECIMAL}, #{releaseDate,jdbcType=VARCHAR}, #{releaseCountry,jdbcType=VARCHAR},
+    #{album,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.Song">
+    update Songs
+    set song_title = #{songTitle,jdbcType=VARCHAR},
+        duration = #{duration,jdbcType=VARCHAR},
+        genres = #{genres,jdbcType=VARCHAR},
+        play_count = #{playCount,jdbcType=VARCHAR},
+        language = #{language,jdbcType=VARCHAR},
+        royalty_rate = #{royaltyRate,jdbcType=DECIMAL},
+        release_date = #{releaseDate,jdbcType=VARCHAR},
+        release_country = #{releaseCountry,jdbcType=VARCHAR},
+        album = #{album,jdbcType=INTEGER}
+    where song_id = #{songId,jdbcType=INTEGER}
+  </update>
+  <update id="updatePlayCountForSongs">
+    UPDATE Songs
+    SET play_count = (
+      SELECT COUNT(*)
+      FROM listenedSong
+      WHERE listenedSong.song_id = Songs.song_id
+      GROUP BY song_id
+    )
+    WHERE Songs.song_id IN (
+      SELECT DISTINCT song_id
+      FROM listenedSong
+    );
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select song_id, song_title, duration, genres, play_count, language, royalty_rate,
+      release_date, release_country, album
+    from Songs
+    where song_id = #{songId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select song_id, song_title, duration, genres, play_count, language, royalty_rate,
+      release_date, release_country, album
+    from Songs
+  </select>
+  <select id="findSongByArtist" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select s.song_id, s.song_title, s.duration, s.genres, s.play_count, s.language, s.royalty_rate,
+           s.release_date, s.release_country, s.album
+    from Songs s left join performed p on s.song_id = p.song_id left join Artists a on a.artist_id=p.artist_id
+    where a.artist_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

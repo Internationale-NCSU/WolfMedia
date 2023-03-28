@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.listenedSongMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.listenedSong">
+    <id column="listener_id" jdbcType="INTEGER" property="listenerId" />
+    <id column="song_id" jdbcType="INTEGER" property="songId" />
+    <id column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from listenedSong
+    where listener_id = #{listenerId,jdbcType=INTEGER}
+      and song_id = #{songId,jdbcType=INTEGER}
+      and date = #{date,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.listenedSong" useGeneratedKeys="true">
+    insert into listenedSong (listener_id, song_id, date
+      )
+    values (#{listenerId,jdbcType=INTEGER}, #{songId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select listener_id, song_id, date
+    from listenedSong
+  </select>
+</mapper>

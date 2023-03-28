@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.invitedMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.invited">
+    <id column="artist_id" jdbcType="INTEGER" property="artistId" />
+    <id column="podcast_episode_id" jdbcType="INTEGER" property="podcastEpisodeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from invited
+    where artist_id = #{artistId,jdbcType=INTEGER}
+      and podcast_episode_id = #{podcastEpisodeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.invited" useGeneratedKeys="true">
+    insert into invited (artist_id, podcast_episode_id)
+    values (#{artistId,jdbcType=INTEGER}, #{podcastEpisodeId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select artist_id, podcast_episode_id
+    from invited
+  </select>
+</mapper>

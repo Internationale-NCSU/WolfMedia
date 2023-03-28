@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.PodcastMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.Podcast">
+    <id column="podcast_id" jdbcType="INTEGER" property="podcastId" />
+    <result column="total_subscribers" jdbcType="VARCHAR" property="totalSubscribers" />
+    <result column="podcast_name" jdbcType="VARCHAR" property="podcastName" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="episode_count" jdbcType="VARCHAR" property="episodeCount" />
+    <result column="genres" jdbcType="VARCHAR" property="genres" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="sponsors" jdbcType="VARCHAR" property="sponsors" />
+    <result column="rating" jdbcType="VARCHAR" property="rating" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Podcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.Podcast" useGeneratedKeys="true">
+    <selectKey keyProperty="podcastId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Podcast (podcast_id, total_subscribers, podcast_name, 
+      country, episode_count, genres, 
+      language, sponsors, rating
+      )
+    values (#{podcastId,jdbcType=INTEGER}, #{totalSubscribers,jdbcType=VARCHAR}, #{podcastName,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{episodeCount,jdbcType=VARCHAR}, #{genres,jdbcType=VARCHAR}, 
+      #{language,jdbcType=VARCHAR}, #{sponsors,jdbcType=VARCHAR}, #{rating,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.Podcast">
+    update Podcast
+    set total_subscribers = #{totalSubscribers,jdbcType=VARCHAR},
+      podcast_name = #{podcastName,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      episode_count = #{episodeCount,jdbcType=VARCHAR},
+      genres = #{genres,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      sponsors = #{sponsors,jdbcType=VARCHAR},
+      rating = #{rating,jdbcType=VARCHAR}
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select podcast_id, total_subscribers, podcast_name, country, episode_count, genres, 
+    language, sponsors, rating
+    from Podcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select podcast_id, total_subscribers, podcast_name, country, episode_count, genres, 
+    language, sponsors, rating
+    from Podcast
+  </select>
+</mapper>

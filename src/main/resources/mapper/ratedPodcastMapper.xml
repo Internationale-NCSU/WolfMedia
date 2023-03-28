@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.ratedPodcastMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.ratedPodcast">
+    <id column="podcast_id" jdbcType="INTEGER" property="podcastId" />
+    <id column="listener_id" jdbcType="INTEGER" property="listenerId" />
+    <result column="rating" jdbcType="VARCHAR" property="rating" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from ratedPodcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.ratedPodcast" useGeneratedKeys="true">
+    insert into ratedPodcast (podcast_id, listener_id, rating
+      )
+    values (#{podcastId,jdbcType=INTEGER}, #{listenerId,jdbcType=INTEGER}, #{rating,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.ratedPodcast">
+    update ratedPodcast
+    set rating = #{rating,jdbcType=VARCHAR}
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select podcast_id, listener_id, rating
+    from ratedPodcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select podcast_id, listener_id, rating
+    from ratedPodcast
+  </select>
+</mapper>

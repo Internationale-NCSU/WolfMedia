@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.AlbumMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.Album">
+    <id column="album_id" jdbcType="INTEGER" property="albumId" />
+    <result column="album_name" jdbcType="VARCHAR" property="albumName" />
+    <result column="track_number" jdbcType="INTEGER" property="trackNumber" />
+    <result column="release_year" jdbcType="VARCHAR" property="releaseYear" />
+    <result column="edition" jdbcType="VARCHAR" property="edition" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Album
+    where album_id = #{albumId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.Album" useGeneratedKeys="true">
+    <selectKey keyProperty="albumId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Album (album_id, album_name, track_number, 
+      release_year, edition)
+    values (#{albumId,jdbcType=INTEGER}, #{albumName,jdbcType=VARCHAR}, #{trackNumber,jdbcType=INTEGER}, 
+      #{releaseYear,jdbcType=VARCHAR}, #{edition,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.Album">
+    update Album
+    set album_name = #{albumName,jdbcType=VARCHAR},
+      track_number = #{trackNumber,jdbcType=INTEGER},
+      release_year = #{releaseYear,jdbcType=VARCHAR},
+      edition = #{edition,jdbcType=VARCHAR}
+    where album_id = #{albumId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select album_id, album_name, track_number, release_year, edition
+    from Album
+    where album_id = #{albumId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select album_id, album_name, track_number, release_year, edition
+    from Album
+  </select>
+</mapper>

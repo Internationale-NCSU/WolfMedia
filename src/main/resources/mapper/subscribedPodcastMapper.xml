@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.subscribedPodcastMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.subscribedPodcast">
+    <id column="podcast_id" jdbcType="INTEGER" property="podcastId" />
+    <id column="listener_id" jdbcType="INTEGER" property="listenerId" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from subscribedPodcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.subscribedPodcast" useGeneratedKeys="true">
+    insert into subscribedPodcast (podcast_id, listener_id, date
+      )
+    values (#{podcastId,jdbcType=INTEGER}, #{listenerId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.subscribedPodcast">
+    update subscribedPodcast
+    set date = #{date,jdbcType=TIMESTAMP}
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select podcast_id, listener_id, date
+    from subscribedPodcast
+    where podcast_id = #{podcastId,jdbcType=INTEGER}
+      and listener_id = #{listenerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select podcast_id, listener_id, date
+    from subscribedPodcast
+  </select>
+</mapper>

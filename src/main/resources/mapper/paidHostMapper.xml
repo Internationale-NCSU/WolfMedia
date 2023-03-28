@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.paidHostMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.paidHost">
+    <id column="paid_host_id" jdbcType="INTEGER" property="paidHostId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="paid_streaming_account_id" jdbcType="INTEGER" property="paidStreamingAccountId" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from paidHost
+    where paid_host_id = #{paidHostId,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+      and paid_streaming_account_id = #{paidStreamingAccountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.paidHost" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into paidHost (paid_host_id, id, paid_streaming_account_id, 
+      amount, date)
+    values (#{paidHostId,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{paidStreamingAccountId,jdbcType=INTEGER}, 
+      #{amount,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.paidHost">
+    update paidHost
+    set amount = #{amount,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where paid_host_id = #{paidHostId,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+      and paid_streaming_account_id = #{paidStreamingAccountId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select paid_host_id, id, paid_streaming_account_id, amount, date
+    from paidHost
+    where paid_host_id = #{paidHostId,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+      and paid_streaming_account_id = #{paidStreamingAccountId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select paid_host_id, id, paid_streaming_account_id, amount, date
+    from paidHost
+  </select>
+</mapper>

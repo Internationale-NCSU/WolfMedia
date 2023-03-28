@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.releasedMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.released">
+    <id column="artist_id" jdbcType="INTEGER" property="artistId" />
+    <id column="album_id" jdbcType="INTEGER" property="albumId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from released
+    where artist_id = #{artistId,jdbcType=INTEGER}
+      and album_id = #{albumId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.released" useGeneratedKeys="true">
+    insert into released (artist_id, album_id)
+    values (#{artistId,jdbcType=INTEGER}, #{albumId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select artist_id, album_id
+    from released
+  </select>
+</mapper>

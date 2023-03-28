@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.PodcastEpisodeMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.PodcastEpisode">
+    <id column="podcast_episode_id" jdbcType="INTEGER" property="podcastEpisodeId" />
+    <result column="episode_title" jdbcType="VARCHAR" property="episodeTitle" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="release_date" jdbcType="VARCHAR" property="releaseDate" />
+    <result column="listening_count" jdbcType="VARCHAR" property="listeningCount" />
+    <result column="advertisement_count" jdbcType="VARCHAR" property="advertisementCount" />
+    <result column="podcast" jdbcType="INTEGER" property="podcast" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PodcastEpisodes
+    where podcast_episode_id = #{podcastEpisodeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.PodcastEpisode" useGeneratedKeys="true">
+    <selectKey keyProperty="podcastEpisodeId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into PodcastEpisodes (podcast_episode_id, episode_title, duration, 
+      release_date, listening_count, advertisement_count, 
+      podcast)
+    values (#{podcastEpisodeId,jdbcType=INTEGER}, #{episodeTitle,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=VARCHAR}, #{listeningCount,jdbcType=VARCHAR}, #{advertisementCount,jdbcType=VARCHAR}, 
+      #{podcast,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.PodcastEpisode">
+    update PodcastEpisodes
+    set episode_title = #{episodeTitle,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=VARCHAR},
+      listening_count = #{listeningCount,jdbcType=VARCHAR},
+      advertisement_count = #{advertisementCount,jdbcType=VARCHAR},
+      podcast = #{podcast,jdbcType=INTEGER}
+    where podcast_episode_id = #{podcastEpisodeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select podcast_episode_id, episode_title, duration, release_date, listening_count, 
+    advertisement_count, podcast
+    from PodcastEpisodes
+    where podcast_episode_id = #{podcastEpisodeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select podcast_episode_id, episode_title, duration, release_date, listening_count, 
+    advertisement_count, podcast
+    from PodcastEpisodes
+  </select>
+</mapper>

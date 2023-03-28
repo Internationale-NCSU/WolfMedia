@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <classPathEntry location="C:\Users\Pinxiang Wang\Downloads\mariadb-java-client-2.7.5.jar" />
+
+    <context id="context" targetRuntime="MyBatis3Simple">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="org.mariadb.jdbc.Driver"
+                        connectionURL="jdbc:mariadb://classdb2.csc.ncsu.edu:3306/pwang25"
+                        userId="pwang25"
+                        password="200421429">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.wolfmediabackend.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="constructorBased" value="false"/>
+            <property name="trimStrings" value="true" />
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wolfmediabackend.mapper"  targetProject="src/main/java">
+        </javaClientGenerator>
+
+        <table schema="" tableName="Album" domainObjectName="Album" mapperName="AlbumMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="album_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="Artists" domainObjectName="Artist" mapperName="ArtistMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="artist_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="Podcast" domainObjectName="Podcast" mapperName="PodcastMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="podcast_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="PodcastEpisodes" domainObjectName="PodcastEpisode" mapperName="PodcastEpisodeMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="podcast_episode_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="PodcastHosts" domainObjectName="PodcastHost" mapperName="PodcastHostMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="host_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="RecordLabel" domainObjectName="RecordLabel" mapperName="RecordLabelMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="record_label_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="Songs" domainObjectName="Song" mapperName="SongMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="song_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="User" domainObjectName="User" mapperName="UserMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="listener_id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="hosted" domainObjectName="hosted" mapperName="hostedMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="invited" domainObjectName="invited" mapperName="invitedMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="listenedPodcast" domainObjectName="listenedPodcast" mapperName="listenedPodcastMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="listenedSong" domainObjectName="listenedSong" mapperName="listenedSongMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="paidArtist" domainObjectName="paidArtist" mapperName="paidArtistMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="paidHost" domainObjectName="paidHost" mapperName="paidHostMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="paidLabel" domainObjectName="paidLabel" mapperName="paidLabelMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="paidService" domainObjectName="paidService" mapperName="paidServiceMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="performed" domainObjectName="performed" mapperName="performedMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="ratedPodcast" domainObjectName="ratedPodcast" mapperName="ratedPodcastMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="released" domainObjectName="released" mapperName="releasedMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="subscribedArtist" domainObjectName="subscribedArtist" mapperName="subscribedArtistMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="subscribedPodcast" domainObjectName="subscribedPodcast" mapperName="subscribedPodcastMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
+        <table schema="" tableName="theMediaStreamingManagement" domainObjectName="theMediaStreamingManagement" mapperName="theMediaStreamingManagementMapper" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+    </context>
+</generatorConfiguration>

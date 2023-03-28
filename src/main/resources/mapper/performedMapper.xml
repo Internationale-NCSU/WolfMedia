@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.performedMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.performed">
+    <id column="song_id" jdbcType="INTEGER" property="songId" />
+    <id column="artist_id" jdbcType="INTEGER" property="artistId" />
+    <result column="is_collaborator" jdbcType="VARCHAR" property="isCollaborator" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from performed
+    where song_id = #{songId,jdbcType=INTEGER}
+      and artist_id = #{artistId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.performed" useGeneratedKeys="true">
+    insert into performed (song_id, artist_id, is_collaborator
+      )
+    values (#{songId,jdbcType=INTEGER}, #{artistId,jdbcType=INTEGER}, #{isCollaborator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.performed">
+    update performed
+    set is_collaborator = #{isCollaborator,jdbcType=VARCHAR}
+    where song_id = #{songId,jdbcType=INTEGER}
+      and artist_id = #{artistId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select song_id, artist_id, is_collaborator
+    from performed
+    where song_id = #{songId,jdbcType=INTEGER}
+      and artist_id = #{artistId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select song_id, artist_id, is_collaborator
+    from performed
+  </select>
+</mapper>

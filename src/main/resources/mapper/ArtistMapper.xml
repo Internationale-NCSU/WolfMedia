@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.ArtistMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.Artist">
+    <id column="artist_id" jdbcType="INTEGER" property="artistId" />
+    <result column="artist_name" jdbcType="VARCHAR" property="artistName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="monthly_listener" jdbcType="VARCHAR" property="monthlyListener" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="primary_genre" jdbcType="VARCHAR" property="primaryGenre" />
+    <result column="record_label" jdbcType="INTEGER" property="recordLabel" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Artists
+    where artist_id = #{artistId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.Artist" useGeneratedKeys="true">
+    <selectKey keyProperty="artistId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Artists (artist_id, artist_name, status, 
+      monthly_listener, type, country, 
+      primary_genre, record_label)
+    values (#{artistId,jdbcType=INTEGER}, #{artistName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{monthlyListener,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{primaryGenre,jdbcType=VARCHAR}, #{recordLabel,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.Artist">
+    update Artists
+    set artist_name = #{artistName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      monthly_listener = #{monthlyListener,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      primary_genre = #{primaryGenre,jdbcType=VARCHAR},
+      record_label = #{recordLabel,jdbcType=INTEGER}
+    where artist_id = #{artistId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select artist_id, artist_name, status, monthly_listener, type, country, primary_genre, 
+    record_label
+    from Artists
+    where artist_id = #{artistId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select artist_id, artist_name, status, monthly_listener, type, country, primary_genre, 
+    record_label
+    from Artists
+  </select>
+</mapper>

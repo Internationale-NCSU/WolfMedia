@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.RecordLabelMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.RecordLabel">
+    <id column="record_label_id" jdbcType="INTEGER" property="recordLabelId" />
+    <result column="record_label_name" jdbcType="VARCHAR" property="recordLabelName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from RecordLabel
+    where record_label_id = #{recordLabelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.RecordLabel" useGeneratedKeys="true">
+    <selectKey keyProperty="recordLabelId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into RecordLabel (record_label_id, record_label_name)
+    values (#{recordLabelId,jdbcType=INTEGER}, #{recordLabelName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.RecordLabel">
+    update RecordLabel
+    set record_label_name = #{recordLabelName,jdbcType=VARCHAR}
+    where record_label_id = #{recordLabelId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select record_label_id, record_label_name
+    from RecordLabel
+    where record_label_id = #{recordLabelId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select record_label_id, record_label_name
+    from RecordLabel
+  </select>
+</mapper>

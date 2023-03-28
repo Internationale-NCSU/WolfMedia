@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfmediabackend.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.User">
+    <id column="listener_id" jdbcType="INTEGER" property="listenerId" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status_of_subscription" jdbcType="VARCHAR" property="statusOfSubscription" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from User
+    where listener_id = #{listenerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wolfmediabackend.bean.User" useGeneratedKeys="true">
+    <selectKey keyProperty="listenerId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into User (listener_id, first_name, last_name, 
+      phone, email, status_of_subscription
+      )
+    values (#{listenerId,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{statusOfSubscription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wolfmediabackend.bean.User">
+    update User
+    set first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status_of_subscription = #{statusOfSubscription,jdbcType=VARCHAR}
+    where listener_id = #{listenerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select listener_id, first_name, last_name, phone, email, status_of_subscription
+    from User
+    where listener_id = #{listenerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select listener_id, first_name, last_name, phone, email, status_of_subscription
+    from User
+  </select>
+</mapper>
