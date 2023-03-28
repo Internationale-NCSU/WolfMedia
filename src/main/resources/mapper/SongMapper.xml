@@ -54,7 +54,7 @@
     WHERE Songs.song_id IN (
       SELECT DISTINCT song_id
       FROM listenedSong
-    );
+    )
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select song_id, song_title, duration, genres, play_count, language, royalty_rate,

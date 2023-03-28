@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class SongsImpl implements SongsService {
+public class SongsServiceImpl implements SongsService {
     private SqlSession sqlSession = MybatisInitilizer.initialize();
     private SongMapper songMapper = sqlSession.getMapper(SongMapper.class);
 
