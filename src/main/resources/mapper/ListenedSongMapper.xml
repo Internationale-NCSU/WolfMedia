@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wolfmediabackend.mapper.listenedSongMapper">
+<mapper namespace="com.wolfmediabackend.mapper.ListenedSongMapper">
   <resultMap id="BaseResultMap" type="com.wolfmediabackend.bean.listenedSong">
     <id column="listener_id" jdbcType="INTEGER" property="listenerId" />
     <id column="song_id" jdbcType="INTEGER" property="songId" />

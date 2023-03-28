@@ -5,7 +5,7 @@ import com.wolfmediabackend.bean.User;
 import com.wolfmediabackend.bean.listenedSong;
 import com.wolfmediabackend.mapper.SongMapper;
 import com.wolfmediabackend.mapper.UserMapper;
-import com.wolfmediabackend.mapper.listenedSongMapper;
+import com.wolfmediabackend.mapper.ListenedSongMapper;
 import com.wolfmediabackend.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 
@@ -16,7 +16,8 @@ public class UserServiceImpl implements UserService {
     private SqlSession sqlSession = MybatisInitilizer.initialize();
     private UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
     private SongMapper songMapper = sqlSession.getMapper(SongMapper.class);
-    private listenedSongMapper lsMapper = sqlSession.getMapper(listenedSongMapper.class);
+    private ListenedSongMapper lsMapper = sqlSession.getMapper(ListenedSongMapper.class);
+
     @Override
     public void deleteUserByPrimaryKey(Integer listenerId) {
         userMapper.deleteByPrimaryKey(listenerId);

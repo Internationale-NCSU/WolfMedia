@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.paidHost;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface paidHostMapper {
+public interface PaidHostMapper {
     int deleteByPrimaryKey(@Param("paidHostId") Integer paidHostId, @Param("id") Integer id, @Param("paidStreamingAccountId") Integer paidStreamingAccountId);
 
     int insert(paidHost record);

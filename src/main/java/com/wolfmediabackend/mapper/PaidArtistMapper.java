@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.paidArtist;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface paidArtistMapper {
+public interface PaidArtistMapper {
     int deleteByPrimaryKey(@Param("id") Integer id, @Param("paidArtistId") Integer paidArtistId, @Param("paidRecordLabelId") Integer paidRecordLabelId);
 
     int insert(paidArtist record);

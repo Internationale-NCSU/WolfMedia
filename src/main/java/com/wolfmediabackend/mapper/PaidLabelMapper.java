@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.paidLabel;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface paidLabelMapper {
+public interface PaidLabelMapper {
     int deleteByPrimaryKey(@Param("paidStreamingAccountId") Integer paidStreamingAccountId, @Param("id") Integer id, @Param("paidRecordLabelId") Integer paidRecordLabelId);
 
     int insert(paidLabel record);

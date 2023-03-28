@@ -3,7 +3,7 @@ package com.wolfmediabackend.mapper;
 import com.wolfmediabackend.bean.theMediaStreamingManagement;
 import java.util.List;
 
-public interface theMediaStreamingManagementMapper {
+public interface TheMediaStreamingManagementMapper {
     int deleteByPrimaryKey(Integer streamingAccountId);
 
     int insert(theMediaStreamingManagement record);

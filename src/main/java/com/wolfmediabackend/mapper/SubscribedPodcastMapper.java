@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.subscribedPodcast;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface subscribedPodcastMapper {
+public interface SubscribedPodcastMapper {
     int deleteByPrimaryKey(@Param("podcastId") Integer podcastId, @Param("listenerId") Integer listenerId);
 
     int insert(subscribedPodcast record);

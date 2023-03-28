@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.ratedPodcast;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface ratedPodcastMapper {
+public interface RatedPodcastMapper {
     int deleteByPrimaryKey(@Param("podcastId") Integer podcastId, @Param("listenerId") Integer listenerId);
 
     int insert(ratedPodcast record);

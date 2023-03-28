@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.performed;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface performedMapper {
+public interface PerformedMapper {
     int deleteByPrimaryKey(@Param("songId") Integer songId, @Param("artistId") Integer artistId);
 
     int insert(performed record);

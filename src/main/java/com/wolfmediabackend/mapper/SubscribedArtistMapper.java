@@ -4,7 +4,7 @@ import com.wolfmediabackend.bean.subscribedArtist;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface subscribedArtistMapper {
+public interface SubscribedArtistMapper {
     int deleteByPrimaryKey(@Param("listenerId") Integer listenerId, @Param("artistId") Integer artistId);
 
     int insert(subscribedArtist record);
